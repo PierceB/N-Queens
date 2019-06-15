@@ -1,8 +1,11 @@
+// N-Queens Serial implementation (Pierce Burke and Zachary Bowditch)
+
 #include <stdio.h>
 #include <stdlib.h>
 
-
 int N = 8;
+int no_solutions = 0;
+
 
 int isValidMove(int board[N][N], int row,int col){
 	//Returns 0 if not valid or 1 if valid
@@ -58,7 +61,8 @@ int solveBoard(int board[N][N], int col){
 			board[i][col] = 1;              //if its allowed put a queen there
 			
 			if(solveBoard(board,col+1))      //call the solve method with the queen in this position
-				return(1) ;                //if it can find a solution then return 1.
+				no_solutions++;
+				//return(1) ;                //if it can find a solution then return 1. (Return first solution found)
 						
 			board[i][col] = 0;          //Else backtrack.
 			}
@@ -67,7 +71,7 @@ int solveBoard(int board[N][N], int col){
 }
 
 
-int printBoard(int board[N][N]){
+void printBoard(int board[N][N]){
 	//Method to print the board
 	for(int i = 0 ; i < N ; i++){
 			for(int k = 0 ; k < N ; k++){
@@ -81,7 +85,6 @@ int main(int argc, char *argv[]){
 	
 	if(argc > 1)
 		N =  atoi(argv[1]);    //If a value is supplied when run. Use that as N 
-	
 
 	int board[N][N] ;  //create board 
 	
@@ -93,10 +96,10 @@ int main(int argc, char *argv[]){
 	printBoard(board); //print blank board
 	
 	if(solveBoard(board,0) == 0) //If no solution is found 
-		printf("no solution \n");
-	else{
-	printf("Solution=======\n");
-	printBoard(board);   //print finished board
+		printf("No. of solutions: %d\n", no_solutions);
+	else {
+		printf("Solution=======\n");
+		printBoard(board);   //print finished board
 	}
 	
 	return(0);
