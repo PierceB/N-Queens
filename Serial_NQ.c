@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 int N = 8;
-int no_solutions = 0;
+int no_solutions = 0; // increment every time a solution is found 
 
 
 int isValidMove(int board[N][N], int row,int col){
