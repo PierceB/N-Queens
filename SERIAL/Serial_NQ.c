@@ -8,7 +8,6 @@
 int N = 8;
 int no_solutions; // increment every time a solution is found 
 
-
 int isValidMove(int **board, int row,int col, int n){
 	//Returns 0 if not valid or 1 if valid
   int i, j; 
@@ -49,7 +48,6 @@ int isValidMove(int **board, int row,int col, int n){
 						return(0);
 				}
 		return(1);
-		
 }
 
 int solveBoard(int **board, int col, int n){
@@ -73,7 +71,6 @@ int solveBoard(int **board, int col, int n){
 	return(0);                   //returns if no solution found.
 }
 
-
 void printBoard(int board[N][N]){
 	//Method to print the board
 	for(int i = 0 ; i < N ; i++){
@@ -87,9 +84,10 @@ void printBoard(int board[N][N]){
 int save_data(const char *filename, int *souls, double *times, int N){
 	FILE *f;
 	f = fopen(filename, "w");
-	for(int i = 0; i < N; i++){
+
+	for(int i = 0; i < N; i++)
 		fprintf(f, "%d:%f:%d\n", i, times[i], souls[i]);
-	}
+
 	fclose(f);
 	return 1;
 }
