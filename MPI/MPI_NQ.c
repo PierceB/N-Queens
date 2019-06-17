@@ -8,7 +8,7 @@
 // Check board configuration for validity
 int is_valid_move(int **board, int row, int col, int n){
 	//Returns 0 if not valid or 1 if valid
-  int i, j; 
+  int i, j;
 	//Check row
 	for(int i = 0; i<n;i++){             //check all blocks in the same row
 		if(i != col){                    //exclude the current queen we jst placed
@@ -24,8 +24,8 @@ int is_valid_move(int **board, int row, int col, int n){
 			}
 		}
 	//Check diagonals
-		//upper left diagonal 
-		
+		//upper left diagonal
+
 		for(i = row, j = col; i>=0 && j >= 0; i--,j--){
 			if(board[i][j])
 				return(0);
@@ -46,26 +46,26 @@ int is_valid_move(int **board, int row, int col, int n){
 						return(0);
 				}
 		return(1);
-		
+
 }
 
 long solve_board(int **board, int col, int n){
 	//recursive implementation for solving N-Queens
 
 	long no_solutions = 0;
-	
+
 	if(col >= n)
 		return(1); //Exit condition for recursion (check within board dimensions)
 
 	for(int i = 0 ; i < n; i++){            //try a queen in each row for the current col
 		if(is_valid_move(board, i, col, n)){
 			board[i][col] = 1;              //if its allowed put a queen there
-			
+
 			if(solve_board(board,col+1, n)){      //call the solve method with the queen in this position
 				no_solutions++;
 				//return(1) ;                //if it can find a solution then return 1. (Return first solution found)
 			}
-						
+
 			board[i][col] = 0;          //Else backtrack.
 			}
 		}
@@ -74,7 +74,7 @@ long solve_board(int **board, int col, int n){
 
 long find_solutions(int n){
 	long solutions = 0;
-	int procs, rank;	
+	int procs, rank;
 
 	MPI_Init(NULL, NULL);
 
@@ -96,13 +96,13 @@ long find_solutions(int n){
 	int **board = (int**)malloc(sizeof(int*) * n);
 	for(int i = 0; i < n; i++)
 		board[i] = (int*)calloc(n, sizeof(int));
-	
+
 	board[0][rank] = 1;
 
 	long souls = solve_board(board, 1, n);
 
 	MPI_Reduce(&souls, &solutions, 1, MPI_LONG, MPI_SUM, 0, MPI_COMM_WORLD);
-
+  MPI_Barrier(MPI_COMM_WORLD) ;
 	MPI_Finalize();
 
 	if(rank == 0){
@@ -116,8 +116,8 @@ long find_solutions(int n){
 void get_board_solutions(int N){
 	long *board_solutions = malloc(sizeof(long)*N);
 	double *times = malloc(sizeof(double)*N);
-	
-	for(int n = 1; n < N; n++){
+
+	for(int n = 0; n < 1; n++){
 		//start timer
 		clock_t start = clock();
 		board_solutions[n] = find_solutions(n);
@@ -125,7 +125,7 @@ void get_board_solutions(int N){
 		clock_t end = clock();
 		times[n] = (double)(end - start);
 	}
-	for(int i = 0; i < N; i++)
+	for(int i = 0; i < 1; i++)
 		printf("solutions[%d] = %ld\n", i, board_solutions[i]);
 }
 

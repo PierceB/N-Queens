@@ -118,11 +118,6 @@ int solveBoard(int **board, int col, int n){
   cudaMalloc((void**)&dBoard, n*n*sizeof(int)) ;
   //cudaMalloc(disValid, sizeof(int));
 
-
-
-
-
-
   size_t block_size = 64 ;
   size_t grid_size = ceil(n*n / block_size) ;
 
