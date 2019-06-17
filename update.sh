@@ -1,10 +1,10 @@
-sudo git status
+git status
 echo "Adding all..."
-sudo sudo git add -A
+git add -A
 echo "Enter commit..."
-sudo git commit
+git commit
 echo "Pulling..."
-sudo git pull
+git pull
 echo "Pushing..."
-sudo git push
+git push
 echo "Done."
