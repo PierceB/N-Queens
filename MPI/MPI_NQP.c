@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -6,8 +5,11 @@
 #include <mpi.h>
 #include <time.h>
 
-int N = 8;
-long souls;
+int N = 15;
+int averages = 5;
+int souls;
+char *filename = "results_mpi.txt";
+double *times;
 
 int isValidMove(int **board, int row,int col, int n){
 	//Returns 0 if not valid or 1 if valid
@@ -53,6 +55,7 @@ int isValidMove(int **board, int row,int col, int n){
 
 int solveBoard(int **board, int count, int col, int n){
 	//recursive implementation for solving N-Queens
+	if(n == 1) souls++;
 
 	if(count >= n)	// if(argc > 2){
 	// 	N =  atoi(argv[1]);    //If a value is supplied when run. Use that as N
@@ -88,11 +91,11 @@ void printBoard(int board[N][N]){
 	}
 }
 
-int save_data(const char *filename, long *souls, double *times, int N){
+int save_data(const char *filename, long *souls, double *times, int n){
 	FILE *f;
 	f = fopen(filename, "w");
 
-	for(int i = 0; i < N; i++)
+	for(int i = 0; i < n; i++)
 		fprintf(f, "%d:%f:%ld\n", i, times[i], souls[i]);
 
 	fclose(f);
@@ -101,64 +104,65 @@ int save_data(const char *filename, long *souls, double *times, int N){
 
 int main(int argc, char *argv[]){
 
-	int averages;
-
-	// if(argc > 2){
-	// 	N =  atoi(argv[1]);    //If a value is supplied when run. Use that as N
-	// 	averages = atoi(argv[2]);
-	// } else {
-	// 	printf("Usage: %s [N (up to)] [number of averages] [filename]\n", argv[0]);
-	// 	exit(1);
-	// }
-
 	double sum;
 	double times[N];
 	double total;
-  long totalSouls;
-   int n = N;
-  int procs, rank;
+	double start, end;
+	long sols[N];
+	int totalSouls = 0;
+	int procs, rank;
+
 
   MPI_Init(NULL, NULL);
 
   MPI_Comm_size(MPI_COMM_WORLD, &procs);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-  int stride = n/(procs) ;
-  int finalNum = (procs - 1)*stride  ;
+  for(int n = 1; n <= N; n++){
+  	if(rank == 0) times[n] = 0.0;
+	  for(int avg = 0; avg < averages; avg++){
+		  souls = 0;
+		  MPI_Barrier(MPI_COMM_WORLD);
+		  start = MPI_Wtime();
 
-	if(rank < N){
+			if(rank < n){
 
-		int r = rank;
-		int **board = malloc(sizeof(double*) * n);
-		for(int i = 0 ; i < n ; i++){
-			board[i] = malloc(sizeof(double) * n);
-			for(int k = 0 ; k < n ; k++)
-				board[i][k] = 0 ;  //Board initialization
+				int r = rank;
+				int **board = malloc(sizeof(double*) * n);
+				for(int i = 0 ; i < n ; i++){
+					board[i] = malloc(sizeof(double) * n);
+					for(int k = 0 ; k < n ; k++)
+						board[i][k] = 0 ;  //Board initialization
+				}
+
+				while(1){
+					board[0][r] = 1;
+					solveBoard(board, 1, (r + 1) % n , n);
+
+					for(int i = 0 ; i < n ; i++)
+						for(int k = 0 ; k < n ; k++)
+							board[i][k] = 0 ;  //Board initialization
+
+
+					r += procs;
+					if(r >= n) break;
+				}
+			} else {
+				souls = 0;
+			}
+
+			MPI_Reduce(&souls, &totalSouls, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
+			end = MPI_Wtime();
+			if(rank == 0) times[n] += end - start;
 		}
 
-		while(1){
-			board[0][r] = 1;
-			solveBoard(board, 1, (r + 1) % n , n);
-
-			for(int i = 0 ; i < n ; i++)
-				for(int k = 0 ; k < n ; k++)
-					board[i][k] = 0 ;  //Board initialization
-
-
-			r += procs;
-			if(r >= N) break;
+		if(rank == 0) {
+			times[n] /= averages;	
+			printf("TotalSouls (%d): %ld: %f\n", n, totalSouls, times[n]);
+			sols[n] = totalSouls;
 		}
-	} else {
-		souls = 0;
-	}
-
-	  MPI_Reduce(&souls, &totalSouls,1,MPI_LONG,MPI_SUM,0,MPI_COMM_WORLD);
-
-
-      if(rank == 0){
-        printf("Number of solutions for %d: %ld \n",n, totalSouls);
-      }
-
+  }
+  save_data(filename, sols, times, N);
   MPI_Finalize();
 
 	return(0);

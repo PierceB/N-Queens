@@ -1,0 +1,169 @@
+Serial: 
+Solutions for 1: 1 : 0.000000
+Solutions for 2: 0 : 0.000001
+Solutions for 3: 0 : 0.000001
+Solutions for 4: 2 : 0.000002
+Solutions for 5: 10 : 0.000006
+Solutions for 6: 4 : 0.000026
+Solutions for 7: 40 : 0.000117
+Solutions for 8: 92 : 0.000537
+Solutions for 9: 352 : 0.002467
+Solutions for 10: 724 : 0.011777
+Solutions for 11: 2680 : 0.059883
+Solutions for 12: 14200 : 0.337405
+Solutions for 13: 73712 : 2.071516
+Solutions for 14: 365596 : 12.822080
+Solutions for 15: 2279184 : 87.034694
+
+MPI (1 procs): 
+TotalSouls (1): 1: 0.000001
+TotalSouls (2): 0: 0.000000
+TotalSouls (3): 0: 0.000001
+TotalSouls (4): 2: 0.000002
+TotalSouls (5): 10: 0.000007
+TotalSouls (6): 4: 0.000030
+TotalSouls (7): 40: 0.000154
+TotalSouls (8): 92: 0.000719
+TotalSouls (9): 352: 0.003634
+TotalSouls (10): 724: 0.019508
+TotalSouls (11): 2680: 0.112349
+TotalSouls (12): 14200: 0.707634
+TotalSouls (13): 73712: 4.768261
+TotalSouls (14): 365596: 33.798832
+TotalSouls (15): 2279184: 253.281928
+
+MPI (2 procs): 
+TotalSouls (1): 1: 0.000007
+TotalSouls (2): 0: 0.000011
+TotalSouls (3): 0: 0.000006
+TotalSouls (4): 2: 0.000015
+TotalSouls (5): 10: 0.000036
+TotalSouls (6): 4: 0.000136
+TotalSouls (7): 40: 0.000620
+TotalSouls (8): 92: 0.000815
+TotalSouls (9): 352: 0.002984
+TotalSouls (10): 724: 0.010743
+TotalSouls (11): 2680: 0.059855
+TotalSouls (12): 14200: 0.364091
+TotalSouls (13): 73712: 2.473493
+TotalSouls (14): 365596: 17.242346
+TotalSouls (15): 2279184: 131.360950
+
+MPI (3 procs): 
+TotalSouls (1): 1: 0.000005
+TotalSouls (2): 0: 0.000012
+TotalSouls (3): 0: 0.000005
+TotalSouls (4): 2: 0.000014
+TotalSouls (5): 10: 0.000030
+TotalSouls (6): 4: 0.000090
+TotalSouls (7): 40: 0.000413
+TotalSouls (8): 92: 0.001943
+TotalSouls (9): 352: 0.004111
+TotalSouls (10): 724: 0.009864
+TotalSouls (11): 2680: 0.040013
+TotalSouls (12): 14200: 0.245859
+TotalSouls (13): 73712: 1.670327
+TotalSouls (14): 365596: 11.733632
+TotalSouls (15): 2279184: 86.906633
+
+MPI (4 procs): 
+TotalSouls (1): 1: 0.000003
+TotalSouls (2): 0: 0.000003
+TotalSouls (3): 0: 0.000002
+TotalSouls (4): 2: 0.000004
+TotalSouls (5): 10: 0.000006
+TotalSouls (6): 4: 0.000017
+TotalSouls (7): 40: 0.000066
+TotalSouls (8): 92: 0.000275
+TotalSouls (9): 352: 0.001512
+TotalSouls (10): 724: 0.008445
+TotalSouls (11): 2680: 0.032974
+TotalSouls (12): 14200: 0.193315
+TotalSouls (13): 73712: 1.283473
+TotalSouls (14): 365596: 9.030721
+TotalSouls (15): 2279184: 68.017131
+
+MPI (5 procs): 
+TotalSouls (1): 1: 0.000003
+TotalSouls (2): 0: 0.000009
+TotalSouls (3): 0: 0.000002
+TotalSouls (4): 2: 0.000005
+TotalSouls (5): 10: 0.000006
+TotalSouls (6): 4: 0.000014
+TotalSouls (7): 40: 0.000069
+TotalSouls (8): 92: 0.000315
+TotalSouls (9): 352: 0.001392
+TotalSouls (10): 724: 0.006879
+TotalSouls (11): 2680: 0.036335
+TotalSouls (12): 14200: 0.237249
+TotalSouls (13): 73712: 1.614066
+TotalSouls (14): 365596: 11.815971
+TotalSouls (15): 2279184: 85.546793
+
+MPI (6 procs): 
+TotalSouls (1): 1: 0.000009
+TotalSouls (2): 0: 0.000004
+TotalSouls (3): 0: 0.000002
+TotalSouls (4): 2: 0.000006
+TotalSouls (5): 10: 0.000005
+TotalSouls (6): 4: 0.000012
+TotalSouls (7): 40: 0.000049
+TotalSouls (8): 92: 0.000277
+TotalSouls (9): 352: 0.001425
+TotalSouls (10): 724: 0.006808
+TotalSouls (11): 2680: 0.038266
+TotalSouls (12): 14200: 0.226523
+TotalSouls (13): 73712: 1.383685
+TotalSouls (14): 365596: 9.725991
+TotalSouls (15): 2279184: 70.503129
+
+MPI (7 procs): 
+TotalSouls (1): 1: 0.000007
+TotalSouls (2): 0: 0.000007
+TotalSouls (3): 0: 0.000003
+TotalSouls (4): 2: 0.000009
+TotalSouls (5): 10: 0.000009
+TotalSouls (6): 4: 0.000024
+TotalSouls (7): 40: 0.000096
+TotalSouls (8): 92: 0.000449
+TotalSouls (9): 352: 0.001909
+TotalSouls (10): 724: 0.007861
+TotalSouls (11): 2680: 0.039031
+TotalSouls (12): 14200: 0.229298
+TotalSouls (13): 73712: 1.420555
+TotalSouls (14): 365596: 9.540397
+TotalSouls (15): 2279184: 67.184033
+
+MPI (8 procs): 
+TotalSouls (1): 1: 0.000024
+TotalSouls (2): 0: 0.000022
+TotalSouls (3): 0: 0.000013
+TotalSouls (4): 2: 0.000019
+TotalSouls (5): 10: 0.000018
+TotalSouls (6): 4: 0.000037
+TotalSouls (7): 40: 0.000128
+TotalSouls (8): 92: 0.000540
+TotalSouls (9): 352: 0.002336
+TotalSouls (10): 724: 0.006111
+TotalSouls (11): 2680: 0.034306
+TotalSouls (12): 14200: 0.216937
+TotalSouls (13): 73712: 1.402902
+TotalSouls (14): 365596: 9.334153
+TotalSouls (15): 2279184: 66.010611
+
+MPI (9 procs): 
+TotalSouls (1): 1: 0.000012
+TotalSouls (2): 0: 0.000012
+TotalSouls (3): 0: 0.000005
+TotalSouls (4): 2: 0.000008
+TotalSouls (5): 10: 0.000009
+TotalSouls (6): 4: 0.000017
+TotalSouls (7): 40: 0.000060
+TotalSouls (8): 92: 0.000317
+TotalSouls (9): 352: 0.001606
+TotalSouls (10): 724: 0.006092
+TotalSouls (11): 2680: 0.046837
+TotalSouls (12): 14200: 0.285188
+TotalSouls (13): 73712: 1.509762
+TotalSouls (14): 365596: 10.245182
+TotalSouls (15): 2279184: 74.244554

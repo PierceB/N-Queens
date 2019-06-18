@@ -102,7 +102,6 @@ long find_solutions(int n){
 	long souls = solve_board(board, 1, n);
 
 	MPI_Reduce(&souls, &solutions, 1, MPI_LONG, MPI_SUM, 0, MPI_COMM_WORLD);
-  MPI_Barrier(MPI_COMM_WORLD) ;
 	MPI_Finalize();
 
 	if(rank == 0){

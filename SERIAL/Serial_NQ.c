@@ -110,10 +110,9 @@ int main(int argc, char *argv[]){
 	int souls[N];
 	
 	for(int n = 1; n <= N; n++){
-		no_solutions = 0;
 		sum = 0.0;
 		for(int count = 0; count < averages; count++){
-			
+			no_solutions = 0;
 			int **board = malloc(sizeof(double*) * n);
 			for(int i = 0 ; i < n ; i++){
 				board[i] = malloc(sizeof(double) * n);	
@@ -126,7 +125,6 @@ int main(int argc, char *argv[]){
 			clock_t start = clock();
 			solveBoard(board, 0, n); //If no solution is found 
 //			printf("No. of solutions: %d\n", no_solutions);
-			printf("Solutions for %d: %d\n", n, no_solutions);
 			
 			clock_t end = clock();
 			total = (double)(end - start) / CLOCKS_PER_SEC;
@@ -134,6 +132,7 @@ int main(int argc, char *argv[]){
 			sum += total;
 		}
 		times[n] = sum / averages;
+		printf("Solutions for %d: %d : %f\n", n, no_solutions, times[n]);
 		souls[n] = no_solutions;
 	}
 
