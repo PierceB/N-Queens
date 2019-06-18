@@ -7,7 +7,7 @@
 #include <time.h>
 
 int N = 8;
-int no_solutions; // increment every time a solution is found
+long souls;
 
 int isValidMove(int **board, int row,int col, int n){
 	//Returns 0 if not valid or 1 if valid
@@ -51,10 +51,10 @@ int isValidMove(int **board, int row,int col, int n){
 		return(1);
 }
 
-int solveBoard(int **board, int col, int n){
+int solveBoard(int **board, int count, int col, int n){
 	//recursive implementation for solving N-Queens
 
-	if(col >= n)	// if(argc > 2){
+	if(count >= n)	// if(argc > 2){
 	// 	N =  atoi(argv[1]);    //If a value is supplied when run. Use that as N
 	// 	averages = atoi(argv[2]);
 	// } else {
@@ -63,12 +63,12 @@ int solveBoard(int **board, int col, int n){
 	// }
 		return(1); //Exit condition for recursion (check within board dimensions)
 
-	for(int i = 0 ; i < n; i++){            //try a queen in each row for the current col
+	for(int i = 1 ; i < n; i++){            //try a queen in each row for the current col
 		if(isValidMove(board,i,col, n)){
 			board[i][col] = 1;              //if its allowed put a queen there
 
-			if(solveBoard(board,col+1, n)){      //call the solve method with the queen in this position
-				no_solutions++;
+			if(solveBoard(board, count + 1, (col+1) % n, n)){      //call the solve method with the queen in this position
+				souls++;
 				//return(1) ;                //if it can find a solution then return 1. (Return first solution found)
 			}
 
@@ -88,12 +88,12 @@ void printBoard(int board[N][N]){
 	}
 }
 
-int save_data(const char *filename, int *souls, double *times, int N){
+int save_data(const char *filename, long *souls, double *times, int N){
 	FILE *f;
 	f = fopen(filename, "w");
 
 	for(int i = 0; i < N; i++)
-		fprintf(f, "%d:%f:%d\n", i, times[i], souls[i]);
+		fprintf(f, "%d:%f:%ld\n", i, times[i], souls[i]);
 
 	fclose(f);
 	return 1;
@@ -114,8 +114,7 @@ int main(int argc, char *argv[]){
 	double sum;
 	double times[N];
 	double total;
-	int souls[N];
-  int totalSouls;
+  long totalSouls;
    int n = N;
   int procs, rank;
 
@@ -127,37 +126,37 @@ int main(int argc, char *argv[]){
   int stride = n/(procs) ;
   int finalNum = (procs - 1)*stride  ;
 
+	if(rank < N){
 
+		int r = rank;
+		int **board = malloc(sizeof(double*) * n);
+		for(int i = 0 ; i < n ; i++){
+			board[i] = malloc(sizeof(double) * n);
+			for(int k = 0 ; k < n ; k++)
+				board[i][k] = 0 ;  //Board initialization
+		}
 
-no_solutions = 0;
+		while(1){
+			board[0][r] = 1;
+			solveBoard(board, 1, (r + 1) % n , n);
 
-if(rank != (procs-1)){
-  for(int r = rank*stride ; r < rank*stride + stride  ; r++)  {
-			int **board = malloc(sizeof(double*) * n);
-			for(int i = 0 ; i < n ; i++){
-				board[i] = malloc(sizeof(double) * n);
+			for(int i = 0 ; i < n ; i++)
 				for(int k = 0 ; k < n ; k++)
 					board[i][k] = 0 ;  //Board initialization
-			}
-			solveBoard(board, r, n);
-}
 
-		//	printf("Solutions for %d: %d\n", n, no_solutions);
-}else{
-  for(int r = finalNum ; r < n; r++){
-			int **board = malloc(sizeof(double*) * n);
-			for(int i = 0 ; i < n ; i++){
-				board[i] = malloc(sizeof(double) * n);
-				for(int k = 0 ; k < n ; k++)
-					board[i][k] = 0 ;  //Board initialization
-			}
-			solveBoard(board, r, n);
-    }
-}
-      MPI_Reduce(&no_solutions, &totalSouls,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD);
+
+			r += procs;
+			if(r >= N) break;
+		}
+	} else {
+		souls = 0;
+	}
+
+	  MPI_Reduce(&souls, &totalSouls,1,MPI_LONG,MPI_SUM,0,MPI_COMM_WORLD);
+
 
       if(rank == 0){
-        printf("Number of solutions for %d: %d \n",n, no_solutions);
+        printf("Number of solutions for %d: %ld \n",n, totalSouls);
       }
 
   MPI_Finalize();
