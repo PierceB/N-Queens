@@ -6,7 +6,7 @@
 #include <mpi.h>
 #include <time.h>
 
-int N = 10;
+int N = 8;
 int no_solutions; // increment every time a solution is found
 
 int isValidMove(int **board, int row,int col, int n){
@@ -124,17 +124,37 @@ int main(int argc, char *argv[]){
   MPI_Comm_size(MPI_COMM_WORLD, &procs);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-		no_solutions = 0;
+  int stride = n/(procs) ;
+  int finalNum = (procs - 1)*stride  ;
+
+
+
+no_solutions = 0;
+
+if(rank != (procs-1)){
+  for(int r = rank*stride ; r < rank*stride + stride  ; r++)  {
 			int **board = malloc(sizeof(double*) * n);
 			for(int i = 0 ; i < n ; i++){
 				board[i] = malloc(sizeof(double) * n);
 				for(int k = 0 ; k < n ; k++)
 					board[i][k] = 0 ;  //Board initialization
 			}
-			solveBoard(board, rank, n);
+			solveBoard(board, r, n);
+}
 
-      MPI_Reduce(&no_solutions, &totalSouls,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD);
 		//	printf("Solutions for %d: %d\n", n, no_solutions);
+}else{
+  for(int r = finalNum ; r < n; r++){
+			int **board = malloc(sizeof(double*) * n);
+			for(int i = 0 ; i < n ; i++){
+				board[i] = malloc(sizeof(double) * n);
+				for(int k = 0 ; k < n ; k++)
+					board[i][k] = 0 ;  //Board initialization
+			}
+			solveBoard(board, r, n);
+    }
+}
+      MPI_Reduce(&no_solutions, &totalSouls,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD);
 
       if(rank == 0){
         printf("Number of solutions for %d: %d \n",n, no_solutions);
