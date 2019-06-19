@@ -14,7 +14,6 @@ Solutions for 12: 14200 : 0.337405
 Solutions for 13: 73712 : 2.071516
 Solutions for 14: 365596 : 12.822080
 Solutions for 15: 2279184 : 87.034694
-
 MPI (1 procs): 
 TotalSouls (1): 1: 0.000001
 TotalSouls (2): 0: 0.000000
@@ -31,7 +30,6 @@ TotalSouls (12): 14200: 0.707634
 TotalSouls (13): 73712: 4.768261
 TotalSouls (14): 365596: 33.798832
 TotalSouls (15): 2279184: 253.281928
-
 MPI (2 procs): 
 TotalSouls (1): 1: 0.000007
 TotalSouls (2): 0: 0.000011
@@ -48,7 +46,6 @@ TotalSouls (12): 14200: 0.364091
 TotalSouls (13): 73712: 2.473493
 TotalSouls (14): 365596: 17.242346
 TotalSouls (15): 2279184: 131.360950
-
 MPI (3 procs): 
 TotalSouls (1): 1: 0.000005
 TotalSouls (2): 0: 0.000012
@@ -65,7 +62,6 @@ TotalSouls (12): 14200: 0.245859
 TotalSouls (13): 73712: 1.670327
 TotalSouls (14): 365596: 11.733632
 TotalSouls (15): 2279184: 86.906633
-
 MPI (4 procs): 
 TotalSouls (1): 1: 0.000003
 TotalSouls (2): 0: 0.000003
@@ -82,7 +78,6 @@ TotalSouls (12): 14200: 0.193315
 TotalSouls (13): 73712: 1.283473
 TotalSouls (14): 365596: 9.030721
 TotalSouls (15): 2279184: 68.017131
-
 MPI (5 procs): 
 TotalSouls (1): 1: 0.000003
 TotalSouls (2): 0: 0.000009
@@ -99,7 +94,6 @@ TotalSouls (12): 14200: 0.237249
 TotalSouls (13): 73712: 1.614066
 TotalSouls (14): 365596: 11.815971
 TotalSouls (15): 2279184: 85.546793
-
 MPI (6 procs): 
 TotalSouls (1): 1: 0.000009
 TotalSouls (2): 0: 0.000004
@@ -116,7 +110,6 @@ TotalSouls (12): 14200: 0.226523
 TotalSouls (13): 73712: 1.383685
 TotalSouls (14): 365596: 9.725991
 TotalSouls (15): 2279184: 70.503129
-
 MPI (7 procs): 
 TotalSouls (1): 1: 0.000007
 TotalSouls (2): 0: 0.000007
@@ -133,7 +126,6 @@ TotalSouls (12): 14200: 0.229298
 TotalSouls (13): 73712: 1.420555
 TotalSouls (14): 365596: 9.540397
 TotalSouls (15): 2279184: 67.184033
-
 MPI (8 procs): 
 TotalSouls (1): 1: 0.000024
 TotalSouls (2): 0: 0.000022
@@ -150,7 +142,6 @@ TotalSouls (12): 14200: 0.216937
 TotalSouls (13): 73712: 1.402902
 TotalSouls (14): 365596: 9.334153
 TotalSouls (15): 2279184: 66.010611
-
 MPI (9 procs): 
 TotalSouls (1): 1: 0.000012
 TotalSouls (2): 0: 0.000012

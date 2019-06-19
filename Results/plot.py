@@ -30,8 +30,6 @@ for i in range(9):
 		x.append(j + 1)
 		souls.append(int(data[2][:-1]))
 		y.append(float(data[3]))
-	if i == 0 or i == 1:
-		continue
 	plt.plot(x[8:], y[8:], label="MPI ({} processes)".format(i + 1))
 
 plt.legend()
