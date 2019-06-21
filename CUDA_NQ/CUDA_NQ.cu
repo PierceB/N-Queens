@@ -35,7 +35,7 @@ int is_valid(int* sol, int n, int row, int col){
 }
 
 long factorial(long num){
-	if(num == 0) return 1;	
+	if(num == 0) return 1;
 	return num*factorial(num - 1);
 }
 
@@ -57,7 +57,7 @@ int generate_partial_solutions(int** psouls, int depth, int n, int threads){
 	for(int i = 0; i < n; i++) sol[i] = -1;
 
 	while(1){
-		printf("Col: %d row:  %d\n", col, row);
+		//printf("Col: %d row:  %d\n", col, row);
 		if(is_valid(sol, n, row, col)){
 			sol[col] = row;
 			row = 0;
@@ -81,11 +81,62 @@ int generate_partial_solutions(int** psouls, int depth, int n, int threads){
 	return psi;
 }
 
+int solve_partial_sols(int** psouls,int start_col, int n){
+
+	int solutions = 0;
+	int row = 0, col = start_col;
+	int sol[n] ;
+
+
+
+for( int s = 0 ; s < 4 ; s++){
+for(int t  = 0 ; t < n; t++){
+
+	for(int k = 0 ; k < n; k++){
+		sol[k] = psouls[s][k] ;
+	//	printf("partial sol: %d \n", sol[k]) ;
+	}
+
+	while(1){
+		printf("is valid inputs: %d %d %d \n", n,t,col) ;
+		if(is_valid(sol,n,t,col)){
+			printf("Debug2: %d %d\n" , t, col ) ;
+			sol[col] = t ;
+			col++;
+		}else{
+			printf("Debug: %d %d\n" , t, col ) ;
+			break ;
+		}
+
+
+		if(is_valid(sol, n, row, col)){
+			sol[col] = row;
+			row = 0;
+			col++;
+			if(col == n){
+				solutions++;
+				row++;
+			}
+		} else {
+			row++;
+		}
+		if(row >= n){
+			sol[col--] = -1;
+			row = sol[col] + 1;
+		}
+		if(col == start_col + 1 && row >= n) break;
+
+
+	}
+}
+	return solutions;
+}
+
 int main(int argc, char *argv[]){
 	int **ps;
-	int depth = 4;
+	int depth = 1;
 	int n = 4;
-	int threads;
+	int threads, num_souls;
 	long numerator = factorial((long)n);
 	long denominator = factorial((long)n - (long)depth);
 	threads = numerator / denominator;
@@ -95,6 +146,10 @@ int main(int argc, char *argv[]){
 	printf("Threads: %ld\n", threads);
 	int partials = generate_partial_solutions(ps, depth, n, threads);
 	printf("Psols: %d\n", partials);
+
+	num_souls = solve_partial_sols(ps,depth,n) ;
+	printf("Number of souls: %d \n", num_souls) ;
+
 	for(int i = 0; i < partials; i++){
 		for(int j = 0; j < n; j++)
 			printf("%d ", ps[i][j]);
