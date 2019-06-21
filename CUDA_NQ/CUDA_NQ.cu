@@ -13,7 +13,7 @@
 #include "inc/helper_functions.h"
 #include "inc/helper_cuda.h"
 
-#define N 4 
+#define N 15
 
 int no_solutions; // increment every time a solution is found
 
@@ -52,22 +52,13 @@ __device__ int d_is_valid(int* sol, int n, int row, int col){
 	return 1;
 }
 
-__device__ int d_solutions;
-
-/*
-__global__ void test(int *a){
-	a[0] = 1;
-	printf("test21 \n"); 
-	a[1] = 2;
-}
-*/
-
 __global__ void solve(int *psols, int *souls, int n, int partials, int start_col){
 
 	int index = blockIdx.x*blockDim.x + threadIdx.x;
 	if(index >= partials) return;
 
 	int row = 0, col = start_col;
+	int temp = 0;
 	souls[index] = 0;
 	int sol[N];
 	for(int i = 0; i < n; i++) sol[i] = psols[index*n + i];
@@ -78,22 +69,24 @@ __global__ void solve(int *psols, int *souls, int n, int partials, int start_col
 			row = 0;
 			col++;
 			if(col == n){
-				souls[index]++;
+				temp++;
 				row++;
 			}
 		} else {
 			row++;
 		}
 		if(row >= n){
-			sol[col--] = -1;
+			sol[col] = -1;
+			col--;
 			row = sol[col] + 1;
 		}
-		if(col == start_col && row >= n) break;
+		if(col < start_col) break;
 	}
+	souls[index] = temp;
 	__syncthreads();
 }
 
-int generate_partial_solutions(int** psouls, int depth, int n, int threads){
+int generate_partial_solutions(int* psouls, int depth, int n, int threads){
 	/*
 	long numerator = factorial((long)n);
 	long denominator = factorial((long)n - (long)depth);
@@ -117,9 +110,8 @@ int generate_partial_solutions(int** psouls, int depth, int n, int threads){
 			row = 0;
 			col++;
 			if(col == depth){
-				psouls[psi] = (int*)malloc(sizeof(int) * n);
 				for(int i = 0; i < n; i++)
-					psouls[psi][i] = sol[i];
+					psouls[psi*n + i] = sol[i];
 				psi++;
 				row++;
 			}
@@ -135,21 +127,26 @@ int generate_partial_solutions(int** psouls, int depth, int n, int threads){
 	return psi;
 }
 
-int solve_partial_sols(int** psouls,int start_col, int n){
+int solve_partial_sols(int* psouls, int start_col, int n, int partials){
 
 	int solutions = 0;
-	int row, col = start_col;
+	int row, col;
 	int sol[n] ;
 
-for(int t = 0; t < n; t++){
+for(int t = 0; t < partials; t++){
+	printf("T: %d\n", t);
 	row = 0;
+	col = start_col;
 	for(int k = 0; k < n; k++){
-		sol[k] = psouls[t][k] ;
+		sol[k] = psouls[t*n + k] ;
+//		printf("%d ", sol[k]);
 	//	printf("partial sol: %d \n", sol[k]) ;
 	}
+	printf("\n");
 
 	while(1){
-		if(is_valid(sol, n, row, col)){
+		int valid = is_valid(sol, n, row, col);
+		if(valid){
 			sol[col] = row;
 			row = 0;
 			col++;
@@ -161,66 +158,94 @@ for(int t = 0; t < n; t++){
 			row++;
 		}
 		if(row >= n){
-			sol[col--] = -1;
+			sol[col] = -1;
+			col--;
 			row = sol[col] + 1;
 		}
-		if(col == start_col && row >= n) break;
+		if(col < start_col) break;
 	}
 }
 	return solutions;
 }
 
 int main(int argc, char *argv[]){
-	int **ps;
-	int depth = 1;
+	int *ps;
+	int depth = atoi(argv[1]);
 	int n = N;
 	int threads;
+	int num_souls;
 	long numerator = factorial((long)n);
 	long denominator = factorial((long)n - (long)depth);
 	threads = numerator / denominator;
 
-	ps = (int**)malloc(sizeof(int) * threads * n);
 
-	printf("Threads: %ld\n", threads);
+	ps = (int*) malloc(sizeof(int) * threads * n);
+
+	cudaEvent_t start, end;
+	cudaEventCreate(&start);
+	cudaEventCreate(&end);
+	cudaEventRecord(start, 0);
+
 	int partials = generate_partial_solutions(ps, depth, n, threads);
-	printf("Psols: %d\n", partials);
 
 	/*
-	num_souls = solve_partial_sols(ps,depth,n) ;
-	printf("Number of souls: %d \n", num_souls) ;
-
 	for(int i = 0; i < partials; i++){
 		for(int j = 0; j < n; j++)
-			printf("%d ", ps[i][j]);
+			printf("%d ", ps[i*n + j]);
 		printf("\n");
 	}
 	*/
 
-	int size = sizeof(double)*partials*n;
-	int block_threads = 12;
-	int blocks = ceil(threads / block_threads);
+
+//	num_souls = solve_partial_sols(ps,depth,n, partials) ;
+//	printf("Main\n");
+//	printf("Number of souls: %d \n", num_souls) ;
+
+	/*
+	for(int i = 0; i < partials; i++){
+		for(int j = 0; j < n; j++)
+			printf("%d ", ps[i*n + j]);
+		printf("\n");
+	}
+	*/
+
+
+	int size = sizeof(int)*partials*n;
+	int block_threads = 1024;
+	int blocks = ceil(partials / block_threads);
+	if(blocks == 0) blocks++;
 
 	int *d_ps;
-	checkCudaErrors(cudaMalloc((void**)&d_ps, size));
+	checkCudaErrors(cudaMalloc((int**)&d_ps, size));
 	checkCudaErrors(cudaMemcpy(d_ps, ps, size, cudaMemcpyHostToDevice));
-	void *souls;
-	int *no_sols = (int*)malloc(sizeof(int) * threads);
-	int *d_no_sols;
-	checkCudaErrors(cudaMemcpy(d_no_sols, &no_sols, sizeof(int) * threads, cudaMemcpyHostToDevice));
-	cudaGetSymbolAddress(&souls, d_solutions);
-	printf("here \n"); 
 
-	solve<<<blocks, block_threads>>>(d_ps, d_no_sols, n, partials, depth);
-	checkCudaErrors(cudaDeviceSynchronize());
+	int *no_sols = (int*) malloc(sizeof(int) * partials);
+	int *d_no_sols;
+	checkCudaErrors(cudaMalloc((int**)&d_no_sols, sizeof(int) * partials));
+	checkCudaErrors(cudaMemcpy(d_no_sols, no_sols, sizeof(int) * partials, cudaMemcpyHostToDevice));
+
+	solve<<< blocks, block_threads >>>(d_ps, d_no_sols, n, partials, depth);
+
+	cudaEventRecord(end, 0);
+	cudaEventSynchronize(end);
+	float time = 0;
+	cudaEventElapsedTime(&time, start, end);
+	printf("Size: %d depth: %d ", n, depth);
+	printf("Partial_solution: %d ", partials);
+	printf("Run_time: %.6f\n", time/1000.0);
+
 	checkCudaErrors(cudaMemcpy(no_sols, d_no_sols, sizeof(int) * partials, cudaMemcpyDeviceToHost));
 
+	//printf("Threads: %d\n", threads);
 	int no_solutions = 0;
-	for(int i = 0; i < partials; i++) no_solutions += no_sols[i];
-//	cudaMemcpyFromSymbol(&no_solutions, "d_solutions", sizeof(int), 0, cudaMemcpyDeviceToHost);
-	printf("Solutions found: %d\n", no_solutions);
+	for(int i = 0; i < partials; i++){
+		if(no_sols[i] > -1){
+//			printf("%d ", no_sols[i]);
+			no_solutions += no_sols[i];
+		}
+	}
 	//Free arrays
 	checkCudaErrors(cudaFree(d_ps));
-	for(int i = 0; i < partials; i++) free(ps[i]);
 	free(ps);
 
 	return(0);
