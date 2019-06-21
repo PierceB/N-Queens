@@ -84,31 +84,17 @@ int generate_partial_solutions(int** psouls, int depth, int n, int threads){
 int solve_partial_sols(int** psouls,int start_col, int n){
 
 	int solutions = 0;
-	int row = 0, col = start_col;
+	int row, col = start_col;
 	int sol[n] ;
 
-
-
-for( int s = 0 ; s < 4 ; s++){
-for(int t  = 0 ; t < n; t++){
-
-	for(int k = 0 ; k < n; k++){
-		sol[k] = psouls[s][k] ;
+for(int t = 0; t < n; t++){
+	row = 0;
+	for(int k = 0; k < n; k++){
+		sol[k] = psouls[t][k] ;
 	//	printf("partial sol: %d \n", sol[k]) ;
 	}
 
 	while(1){
-		printf("is valid inputs: %d %d %d \n", n,t,col) ;
-		if(is_valid(sol,n,t,col)){
-			printf("Debug2: %d %d\n" , t, col ) ;
-			sol[col] = t ;
-			col++;
-		}else{
-			printf("Debug: %d %d\n" , t, col ) ;
-			break ;
-		}
-
-
 		if(is_valid(sol, n, row, col)){
 			sol[col] = row;
 			row = 0;
@@ -124,9 +110,7 @@ for(int t  = 0 ; t < n; t++){
 			sol[col--] = -1;
 			row = sol[col] + 1;
 		}
-		if(col == start_col + 1 && row >= n) break;
-
-
+		if(col == start_col && row >= n) break;
 	}
 }
 	return solutions;

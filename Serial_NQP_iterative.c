@@ -25,7 +25,6 @@ int solve(int N){
 	for(int i = 0; i < N; i++) sol[i] = -1;
 
 	while(1){
-		print_arr(sol, N);
 		if(is_valid(sol, N, row, col)){
 			sol[col] = row;
 			row = 0;
