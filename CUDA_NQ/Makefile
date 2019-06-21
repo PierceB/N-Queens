@@ -6,8 +6,8 @@ IFLAGS 	= -I/usr/local/cuda-10.0/samples/common/inc #Included sample Files
 # all: histogram target_name
 
 CUDA_NQ: CUDA_NQ.cu
-	$(CC) CUDA_NQ.cu -g $(LDFLAGS) $(IFLAGS) -c $<
-	$(CC) CUDA_NQ.o  -g $(LDFLAGS) $(IFLAGS) -o CUDA_NQ
+	$(CC) CUDA_NQ.cu  $(LDFLAGS) $(IFLAGS) -c $<
+	$(CC) CUDA_NQ.o   $(LDFLAGS) $(IFLAGS) -o CUDA_NQ
 
 # target_name: object_name.cu
 	#$(CC) object_name.cu $(LDFLAGS) $(IFLAGS) -c $<
