@@ -1,0 +1,2 @@
+slurm.8.4.out:15:9.030440:2279184
+Size: 15 depth: 6 Partial_solution: 463038 Total_time: 53.919512 Solve_time: 0.840452

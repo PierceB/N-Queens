@@ -1,6 +1,6 @@
-Size: 7 depth: 1 Partial_solution: 7 Run_time: 0.000678
-Size: 7 depth: 2 Partial_solution: 30 Run_time: 0.000403
-Size: 7 depth: 3 Partial_solution: 76 Run_time: 0.000379
-Size: 7 depth: 4 Partial_solution: 140 Run_time: 0.000340
-Size: 7 depth: 5 Partial_solution: 164 Run_time: 0.000314
-Size: 7 depth: 6 Partial_solution: 94 Run_time: 0.000305
+Size: 7 depth: 1 Partial_solution: 7 Total_time: 0.000741 Solve_time: 0.000678
+Size: 7 depth: 2 Partial_solution: 30 Total_time: 0.000443 Solve_time: 0.000380
+Size: 7 depth: 3 Partial_solution: 76 Total_time: 0.000433 Solve_time: 0.000366
+Size: 7 depth: 4 Partial_solution: 140 Total_time: 0.000373 Solve_time: 0.000301
+Size: 7 depth: 5 Partial_solution: 164 Total_time: 0.000364 Solve_time: 0.000289
+Size: 7 depth: 6 Partial_solution: 94 Total_time: 0.000353 Solve_time: 0.000277

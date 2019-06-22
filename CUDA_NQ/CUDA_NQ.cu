@@ -181,7 +181,7 @@ int main(int argc, char *argv[]){
 
 	ps = (int*) malloc(sizeof(int) * threads * n);
 
-	cudaEvent_t start, end;
+	cudaEvent_t start, end, solve_start;
 	cudaEventCreate(&start);
 	cudaEventCreate(&end);
 	cudaEventRecord(start, 0);
@@ -216,6 +216,8 @@ int main(int argc, char *argv[]){
 	if(blocks == 0) blocks++;
 
 	int *d_ps;
+	cudaEventCreate(&solve_start);
+	cudaEventRecord(solve_start, 0);
 	checkCudaErrors(cudaMalloc((int**)&d_ps, size));
 	checkCudaErrors(cudaMemcpy(d_ps, ps, size, cudaMemcpyHostToDevice));
 
@@ -229,10 +231,13 @@ int main(int argc, char *argv[]){
 	cudaEventRecord(end, 0);
 	cudaEventSynchronize(end);
 	float time = 0;
+	float solve_time = 0;
 	cudaEventElapsedTime(&time, start, end);
+	cudaEventElapsedTime(&solve_time, solve_start, end);
 	printf("Size: %d depth: %d ", n, depth);
 	printf("Partial_solution: %d ", partials);
-	printf("Run_time: %.6f\n", time/1000.0);
+	printf("Total_time: %.6f ", time/1000.0);
+	printf("Solve_time: %.6f\n", solve_time/1000.0);
 
 	checkCudaErrors(cudaMemcpy(no_sols, d_no_sols, sizeof(int) * partials, cudaMemcpyDeviceToHost));
 

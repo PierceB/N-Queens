@@ -1,9 +1,9 @@
-Size: 13 depth: 1 Partial_solution: 13 Run_time: 7.137853
-Size: 13 depth: 2 Partial_solution: 132 Run_time: 2.036193
-Size: 13 depth: 3 Partial_solution: 1030 Run_time: 1.331264
-Size: 13 depth: 4 Partial_solution: 6404 Run_time: 1.192574
-Size: 13 depth: 5 Partial_solution: 31100 Run_time: 1.176418
-Size: 13 depth: 6 Partial_solution: 117694 Run_time: 1.179936
-Size: 13 depth: 7 Partial_solution: 335010 Run_time: 1.204613
-Size: 13 depth: 8 Partial_solution: 707698 Run_time: 1.246767
-Size: 13 depth: 9 Partial_solution: 1086568 Run_time: 1.315725
+Size: 13 depth: 1 Partial_solution: 13 Total_time: 7.153292 Solve_time: 5.969799
+Size: 13 depth: 2 Partial_solution: 132 Total_time: 2.034542 Solve_time: 0.866459
+Size: 13 depth: 3 Partial_solution: 1030 Total_time: 1.329566 Solve_time: 0.174644
+Size: 13 depth: 4 Partial_solution: 6404 Total_time: 1.194232 Solve_time: 0.040827
+Size: 13 depth: 5 Partial_solution: 31100 Total_time: 1.177441 Solve_time: 0.018600
+Size: 13 depth: 6 Partial_solution: 117694 Total_time: 1.186242 Solve_time: 0.018871
+Size: 13 depth: 7 Partial_solution: 335010 Total_time: 1.239447 Solve_time: 0.020380
+Size: 13 depth: 8 Partial_solution: 707698 Total_time: 1.259418 Solve_time: 0.026000
+Size: 13 depth: 9 Partial_solution: 1086568 Total_time: 1.280472 Solve_time: 0.024617

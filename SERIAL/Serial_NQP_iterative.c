@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 int is_valid(int* sol, int n, int row, int col){
 	if(row >= n) return 0;
@@ -46,8 +47,12 @@ int solve(int N){
 }
 
 int main(int argc, char **argv){
-	int N = 8;
-	int souls = solve(N);
-	printf("Solutions: %d\n", souls);
+	for(int n = 1; n <= 15; n++){
+		clock_t start = clock();		
+		int souls = solve(n);
+		clock_t end = clock();
+		double duration = (double) (end - start) / CLOCKS_PER_SEC;
+		printf("n: %d sols: %d time: %.6f\n", n, souls, duration);
+	}
 	return 1;
 }

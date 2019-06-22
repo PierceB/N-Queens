@@ -1,0 +1,2 @@
+Size: 3 depth: 1 Partial_solution: 3 Total_time: 0.000178 Solve_time: 0.000176
+Size: 3 depth: 2 Partial_solution: 2 Total_time: 0.000133 Solve_time: 0.000131

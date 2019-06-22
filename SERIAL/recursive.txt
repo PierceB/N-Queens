@@ -1,0 +1,16 @@
+Recursive: 
+n: 1 souls: 1 time: 0.000000
+n: 2 souls: 0 time: 0.000001
+n: 3 souls: 0 time: 0.000001
+n: 4 souls: 2 time: 0.000002
+n: 5 souls: 10 time: 0.000006
+n: 6 souls: 4 time: 0.000026
+n: 7 souls: 40 time: 0.000117
+n: 8 souls: 92 time: 0.000537
+n: 9 souls: 352 time: 0.002467
+n: 10 souls: 724 time: 0.011777
+n: 11 souls: 2680 time: 0.059883
+n: 12 souls: 14200 time: 0.337405
+n: 13 souls: 73712 time: 2.071516
+n: 14 souls: 365596 time: 12.822080
+n: 15 souls: 2279184 time: 87.034694

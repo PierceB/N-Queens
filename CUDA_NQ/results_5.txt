@@ -1,4 +1,4 @@
-Size: 5 depth: 1 Partial_solution: 5 Run_time: 0.000183
-Size: 5 depth: 2 Partial_solution: 12 Run_time: 0.000172
-Size: 5 depth: 3 Partial_solution: 14 Run_time: 0.000150
-Size: 5 depth: 4 Partial_solution: 12 Run_time: 0.000151
+Size: 5 depth: 1 Partial_solution: 5 Total_time: 0.000180 Solve_time: 0.000174
+Size: 5 depth: 2 Partial_solution: 12 Total_time: 0.000167 Solve_time: 0.000161
+Size: 5 depth: 3 Partial_solution: 14 Total_time: 0.000145 Solve_time: 0.000139
+Size: 5 depth: 4 Partial_solution: 12 Total_time: 0.000146 Solve_time: 0.000140

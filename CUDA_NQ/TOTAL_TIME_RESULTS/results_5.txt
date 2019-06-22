@@ -1,0 +1,4 @@
+Size: 5 depth: 1 Partial_solution: 5 Run_time: 0.000183
+Size: 5 depth: 2 Partial_solution: 12 Run_time: 0.000172
+Size: 5 depth: 3 Partial_solution: 14 Run_time: 0.000150
+Size: 5 depth: 4 Partial_solution: 12 Run_time: 0.000151

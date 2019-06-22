@@ -1,3 +1,3 @@
-Size: 4 depth: 1 Partial_solution: 4 Run_time: 0.000140
-Size: 4 depth: 2 Partial_solution: 6 Run_time: 0.000137
-Size: 4 depth: 3 Partial_solution: 4 Run_time: 0.000139
+Size: 4 depth: 1 Partial_solution: 4 Total_time: 0.000146 Solve_time: 0.000143
+Size: 4 depth: 2 Partial_solution: 6 Total_time: 0.000140 Solve_time: 0.000137
+Size: 4 depth: 3 Partial_solution: 4 Total_time: 0.000137 Solve_time: 0.000134

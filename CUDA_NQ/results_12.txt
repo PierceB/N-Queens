@@ -1,10 +1,10 @@
-Size: 12 depth: 1 Partial_solution: 12 Run_time: 1.225024
-Size: 12 depth: 2 Partial_solution: 110 Run_time: 0.362435
-Size: 12 depth: 3 Partial_solution: 756 Run_time: 0.230798
-Size: 12 depth: 4 Partial_solution: 4080 Run_time: 0.203249
-Size: 12 depth: 5 Partial_solution: 16852 Run_time: 0.198618
-Size: 12 depth: 6 Partial_solution: 52856 Run_time: 0.205692
-Size: 12 depth: 7 Partial_solution: 120104 Run_time: 0.207906
-Size: 12 depth: 8 Partial_solution: 195270 Run_time: 0.214813
-Size: 12 depth: 9 Partial_solution: 222720 Run_time: 0.218975
-Size: 12 depth: 10 Partial_solution: 160964 Run_time: 0.220618
+Size: 12 depth: 1 Partial_solution: 12 Total_time: 1.187808 Solve_time: 0.993977
+Size: 12 depth: 2 Partial_solution: 110 Total_time: 0.357789 Solve_time: 0.167474
+Size: 12 depth: 3 Partial_solution: 756 Total_time: 0.227237 Solve_time: 0.038325
+Size: 12 depth: 4 Partial_solution: 4080 Total_time: 0.198841 Solve_time: 0.009975
+Size: 12 depth: 5 Partial_solution: 16852 Total_time: 0.193627 Solve_time: 0.003709
+Size: 12 depth: 6 Partial_solution: 52856 Total_time: 0.196663 Solve_time: 0.003600
+Size: 12 depth: 7 Partial_solution: 120104 Total_time: 0.202943 Solve_time: 0.003658
+Size: 12 depth: 8 Partial_solution: 195270 Total_time: 0.208790 Solve_time: 0.003664
+Size: 12 depth: 9 Partial_solution: 222720 Total_time: 0.213897 Solve_time: 0.003147
+Size: 12 depth: 10 Partial_solution: 160964 Total_time: 0.214493 Solve_time: 0.001898

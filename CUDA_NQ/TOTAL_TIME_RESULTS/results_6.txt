@@ -1,0 +1,5 @@
+Size: 6 depth: 1 Partial_solution: 6 Run_time: 0.000263
+Size: 6 depth: 2 Partial_solution: 20 Run_time: 0.000220
+Size: 6 depth: 3 Partial_solution: 36 Run_time: 0.000184
+Size: 6 depth: 4 Partial_solution: 46 Run_time: 0.000250
+Size: 6 depth: 5 Partial_solution: 40 Run_time: 0.000212

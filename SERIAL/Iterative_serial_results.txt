@@ -1,0 +1,16 @@
+Iterative:
+n: 1 sols: 1 time: 0.000001
+n: 2 sols: 0 time: 0.000001
+n: 3 sols: 0 time: 0.000013
+n: 4 sols: 2 time: 0.000002
+n: 5 sols: 10 time: 0.000005
+n: 6 sols: 4 time: 0.000046
+n: 7 sols: 40 time: 0.000091
+n: 8 sols: 92 time: 0.000337
+n: 9 sols: 352 time: 0.001546
+n: 10 sols: 724 time: 0.007347
+n: 11 sols: 2680 time: 0.038469
+n: 12 sols: 14200 time: 0.218460
+n: 13 sols: 73712 time: 1.318023
+n: 14 sols: 365596 time: 8.500456
+n: 15 sols: 2279184 time: 58.339713
