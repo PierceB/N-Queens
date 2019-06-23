@@ -6,6 +6,7 @@ from mpl_toolkits.mplot3d import Axes3D
 markers = ['o', '^', '>', '*']
 colours = ['r', 'b', 'g', 'y']
 
+out = open("all.txt", 'w')
 
 #fig = plt.figure()
 #ax = fig.add_subplot(111, projection='3d')
@@ -34,6 +35,22 @@ for N in range(2, 16):
 
 	f.close()
 
+out.write("Total_times")
+for i in range(6):
+	out.write(":NA")
+for i in range(len(times)):
+	out.write(":{}".format(times[i]))
+
+out.write("\n")
+
+out.write("Solve_times")
+for i in range(6):
+	out.write(":NA")
+for i in range(len(solve_times)):
+	out.write(":{}".format(solve_times[i]))
+
+out.write("\n");
+
 plt.plot(sizes, times, label="CUDA (depth 6) (Total time)", color=colours[0])
 plt.plot(sizes, solve_times, label="CUDA (depth 6) (Solve time)", color=colours[3])
 
@@ -47,6 +64,12 @@ for line in lines:
 	sizes.append(int(data[0]))	
 	times.append(float(data[1]))
 
+out.write("MPI")
+for i in range(len(times)):
+	out.write(":{}".format(times[i]))
+
+out.write("\n")
+
 plt.plot(sizes, times, label="MPI (Nodes: 8, Threads per node: 4)", color=colours[1])
 f.close()
 
@@ -59,8 +82,14 @@ for line in lines:
 	sizes.append(int(data[1]))
 	times.append(float(data[5]))
 
-plt.plot(sizes, times, label="Serial (Recursive)", color=colours[2])
 f.close()
+out.write("Serial")
+for i in range(len(times)):
+	out.write(":{}".format(times[i]))
+out.write("\n")
+out.close()
+
+plt.plot(sizes, times, label="Serial (Recursive)", color=colours[2])
 
 plt.legend()
 output = "method_comparison_graph".format(N)
