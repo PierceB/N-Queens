@@ -81,7 +81,7 @@ void printBoard(int board[N][N]){
 	}
 }
 
-int save_data(const char *filename, int *souls, double *times, int N){
+int save_data(const char *filename, int *souls, double *times, int N){ // helper function to save data to file
 	FILE *f;
 	f = fopen(filename, "w");
 
@@ -92,22 +92,22 @@ int save_data(const char *filename, int *souls, double *times, int N){
 	return 1;
 }
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[]){    
 
-	int averages;
+	int averages; 
 	
 	if(argc > 2){
-		N =  atoi(argv[1]);    //If a value is supplied when run. Use that as N 
-		averages = atoi(argv[2]);	
+		N =  atoi(argv[1]);    //If a value is supplied when run. Use that as N else use the default supplied above 
+		averages = atoi(argv[2]); 	 //number of times it needs to be run to get average results
 	} else {
 		printf("Usage: %s [N (up to)] [number of averages] [filename]\n", argv[0]);
 		exit(1);
 	}
 
 	double sum;
-	double times[N];
-	double total;
-	int souls[N];
+	double times[N];    //array to store times recorded
+	double total;       // total time recorded
+	int souls[N];       // number of solutions
 	
 	for(int n = 1; n <= N; n++){
 		sum = 0.0;
@@ -123,20 +123,20 @@ int main(int argc, char *argv[]){
 		//	printBoard(board); //print blank board
 			
 			clock_t start = clock();
-			solveBoard(board, 0, n); //If no solution is found 
+			solveBoard(board, 0, n); //If no solution is found, this is the recursive call 
 //			printf("No. of solutions: %d\n", no_solutions);
 			
 			clock_t end = clock();
 			total = (double)(end - start) / CLOCKS_PER_SEC;
 
-			sum += total;
+			sum += total; // total time taken for it to calculate for this board size
 		}
-		times[n] = sum / averages;
+		times[n] = sum / averages; //calculate the average time taken for each run.
 		printf("Solutions for %d: %d : %f\n", n, no_solutions, times[n]);
 		souls[n] = no_solutions;
 	}
 
-	if(argc > 3) save_data(argv[3], souls, times, N);
+	if(argc > 3) save_data(argv[3], souls, times, N); // if a third argument is given, save the file
 
 	return(0);
 }
